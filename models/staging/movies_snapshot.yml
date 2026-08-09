@@ -1,0 +1,15 @@
+snapshots:
+  - name: movies_snapshot
+    relation: ref('stg_movies')
+
+    config:
+      schema: snapshots
+      unique_key: movie_id
+      strategy: check
+
+      check_cols:
+        - popularity
+        - average_rating
+        - rating_count
+
+      updated_at: loaded_at
