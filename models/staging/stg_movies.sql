@@ -8,6 +8,6 @@ select
     rating_count,
     popularity,
     adult,
-    ingested_at
+    loaded_at
 
 from {{ source('raw', 'movies') }}
