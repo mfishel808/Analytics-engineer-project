@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='movie_id',
+        incremental_strategy='merge'
+    )
+}}
+
 select
     movie_id,
     title,

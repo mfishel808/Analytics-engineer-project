@@ -7,4 +7,5 @@ sources:
 
     tables:
       - name: movies
+      - name: people
       
