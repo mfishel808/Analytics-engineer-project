@@ -9,3 +9,5 @@ sources:
       - name: movies
       - name: people
       
+      - name: genres
+      
