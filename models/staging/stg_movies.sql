@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='movie_id',
+        incremental_strategy='merge'
+    )
+}}
+
 select
     movie_id,
     title,
@@ -8,6 +16,6 @@ select
     rating_count,
     popularity,
     adult,
-    ingested_at
+    loaded_at
 
 from {{ source('raw', 'movies') }}

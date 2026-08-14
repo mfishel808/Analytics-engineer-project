@@ -13,3 +13,16 @@ snapshots:
         - rating_count
 
       updated_at: loaded_at
+
+  - name: people_snapshot
+    relation: ref('stg_people')
+
+    config:
+      schema: snapshots
+      unique_key: person_id
+      strategy: check
+
+      check_cols:
+        - popularity
+      
+      updated_at: loaded_at

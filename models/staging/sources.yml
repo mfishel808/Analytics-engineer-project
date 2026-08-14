@@ -7,4 +7,9 @@ sources:
 
     tables:
       - name: movies
+      - name: people
+      
+      - name: genres
+      - name: movie_genres
+      - name: movie_credits
       

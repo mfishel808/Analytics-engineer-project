@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: dim_movies
+    columns:
+      - name: movie_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: popularity
+        data_tests:
+          - not_null
+
+  - name: dim_people
+    columns:
+      - name: person_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: ref_genres
+    columns:
+      - name: genre_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: bridge_movie_genres
+    columns:
+      - name: movie_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_movies')
+                field: movie_id
+
+      - name: genre_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('ref_genres')
+                field: genre_id
+
+  - name: bridge_movie_credits
+    columns:
+      - name: credit_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: movie_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_movies')
+                field: movie_id
+
+      - name: person_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_people')
+                field: person_id
+                
