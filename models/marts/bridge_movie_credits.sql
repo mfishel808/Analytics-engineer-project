@@ -14,6 +14,6 @@ credit_type,
 character_name,
 department,
 job,
-cast_order
+cast_order,
 loaded_at
 from {{source('raw', 'movie_credits')}}
