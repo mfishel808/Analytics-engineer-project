@@ -9,7 +9,7 @@ import time
 
 import requests
 
-from config import (
+from DBT_config import (
     DBT_ACCOUNT_ID,
     DBT_API_TOKEN,
     DBT_JOB_ID,
