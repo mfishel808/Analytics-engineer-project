@@ -38,9 +38,4 @@ jobs:
           DBT_ACCOUNT_ID: ${{ secrets.DBT_ACCOUNT_ID }}
           DBT_JOB_ID: ${{ secrets.DBT_JOB_ID }}
 
-        run: |
-          curl --fail --request POST \
-            --url "https://cloud.getdbt.com/api/v2/accounts/${DBT_ACCOUNT_ID}/jobs/${DBT_JOB_ID}/run/" \
-            --header "Authorization: Token ${DBT_API_TOKEN}" \
-            --header "Content-Type: application/json" \
-            --data '{"cause":"Triggered by GitHub Actions after successful TMDB ingestion"}'
+        run: python python/dbt_run_monitor.py
