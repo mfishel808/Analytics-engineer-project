@@ -34,7 +34,3 @@ SNOWFLAKE_WAREHOUSE = require_environment_variable("SNOWFLAKE_WAREHOUSE")
 SNOWFLAKE_DATABASE = require_environment_variable("SNOWFLAKE_DATABASE")
 SNOWFLAKE_SCHEMA = require_environment_variable("SNOWFLAKE_SCHEMA")
 SNOWFLAKE_ROLE = require_environment_variable("SNOWFLAKE_ROLE")
-#DBT info
-DBT_API_TOKEN = require_environment_variable("DBT_API_TOKEN")
-DBT_ACCOUNT_ID = require_environment_variable("DBT_ACCOUNT_ID")
-DBT_JOB_ID = require_environment_variable("DBT_JOB_ID")
