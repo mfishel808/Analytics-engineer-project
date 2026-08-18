@@ -3,6 +3,10 @@ name: StreamSight Pipeline
 on:
   workflow_dispatch:
 
+  schedule:
+    - cron: "0 8 * * 0"
+      timezone: "America/Chicago"
+
 jobs:
   pipeline:
     runs-on: ubuntu-latest
