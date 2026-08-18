@@ -31,6 +31,16 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
 
         run: python python/main.py
+      - name: Check dbt config
+        env:
+          DBT_ACCOUNT_ID: ${{ secrets.DBT_ACCOUNT_ID }}
+          DBT_JOB_ID: ${{ secrets.DBT_JOB_ID }}
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+      
+        run: |
+          echo "Host: ${DBT_HOST}"
+          echo "Account: ${DBT_ACCOUNT_ID}"
+          echo "Job: ${DBT_JOB_ID}"
 
       - name: Trigger dbt production job
         env:
