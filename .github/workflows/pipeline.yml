@@ -51,6 +51,6 @@ jobs:
         run: |
           curl --fail --request POST \
             --url "https://th157.us1.dbt.com/api/v2/accounts/${DBT_ACCOUNT_ID}/jobs/${DBT_JOB_ID}/run/" \
-            --header "Authorization: Bearer ${DBT_API_TOKEN}" \
+            --header "Authorization: Token ${DBT_API_TOKEN}" \
             --header "Content-Type: application/json" \
             --data '{"cause":"Triggered by GitHub Actions after successful TMDB ingestion"}'
