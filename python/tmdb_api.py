@@ -165,3 +165,51 @@ def get_movie_credits(movies: list[dict]) -> list[dict]|list:
                 id_not_loaded.append(movie_id)
 
     return people_records, movie_credit_records, id_not_loaded
+
+def get_movie_details(movies: list[dict]) -> list[dict]|list:
+
+    movie_detail_records = []
+
+    movie_list = [movie["id"] for movie in movies]
+    movie_unique = list(set(movie_list))
+
+    id_not_loaded = movie_unique
+
+    while len(id_not_loaded) > 10:
+        movie_unique = id_not_loaded
+        id_not_loaded = []
+
+        for movie_id in movie_unique:
+            try:
+                url = (
+                    f"https://api.themoviedb.org/3/movie/{movie_id}"
+                )
+
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    timeout=30,
+                )
+
+                response.raise_for_status()
+
+                movie_data = response.json()
+
+                movie_detail_records.append(
+                    {
+                        "movie_id": movie_id,
+                        "budget": movie_data.get("budget"),
+                        "revenue": movie_data.get("revenue"),
+                        "runtime": movie_data.get("runtime"),
+                    }
+                )
+
+            except requests.exceptions.RequestException as error:
+                print(
+                    f"Could not load details for movie "
+                    f"{movie_id}: {error}"
+                )
+
+                id_not_loaded.append(movie_id)
+
+    return movie_detail_records, id_not_loaded

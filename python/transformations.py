@@ -5,10 +5,9 @@ Created on Tue Aug  4 22:25:15 2026
 @author: maxfi
 """
 import pandas as pd
-def popular_movies_clean(all_movies):
+def popular_movies_clean(main = 'all_movies', detail = 'detail'):
     movie_rows = []
-    
-    for movie in all_movies:
+    for movie in main:
         movie_rows.append(
             {
                 "movie_id": movie.get("id"),
@@ -23,21 +22,29 @@ def popular_movies_clean(all_movies):
             }
         )
     
-    movies_df = pd.DataFrame(movie_rows)
     
-    movies_df["release_date"] = (pd.to_datetime(
-        movies_df["release_date"],
+    movies_main = pd.DataFrame(movie_rows)
+    
+    
+    movies_main["release_date"] = (pd.to_datetime(
+        movies_main["release_date"],
         errors="coerce",).dt.date
     )
+    movies_main = movies_main.drop_duplicates(
+        subset="movie_id",
+        keep="last",
+    )
+    movie_detail = pd.DataFrame(detail)
+    movies_df = pd.merge(movies_main, movie_detail, on='movie_id', how = 'left')
     
     print(movies_df.shape)
     print(movies_df.head())
-    
-    
     movies_df = movies_df.drop_duplicates(
         subset="movie_id",
         keep="last",
     )
+    
+   
     
     print("Rows:", len(movies_df))
     print("Unique movies:", movies_df["movie_id"].nunique())
