@@ -1,0 +1,121 @@
+table DIM_PEOPLE
+	lineageTag: e14333a7-8f80-497a-ab3a-d43b5af40ef1
+
+	column PERSON_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: e1142f11-33eb-43a2-863c-57955e6918bc
+		summarizeBy: count
+		sourceColumn: PERSON_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PERSON_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 2ba88bbe-8677-4f5e-887f-e0ed6df0e9a5
+		summarizeBy: none
+		sourceColumn: PERSON_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column KNOWN_FOR_DEPARTMENT
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 80913a79-32ac-45cc-9a17-e573b2b1df2c
+		summarizeBy: none
+		sourceColumn: KNOWN_FOR_DEPARTMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column GENDER
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: fe0c39eb-3df4-4478-a6da-e124fc8c7f74
+		summarizeBy: sum
+		sourceColumn: GENDER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POPULARITY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 331ec65f-6d5c-40d5-9d55-85f86a7053d9
+		summarizeBy: sum
+		sourceColumn: POPULARITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_POPULARITY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: ca88eb02-0480-45ab-958e-f930f872b50b
+		summarizeBy: sum
+		sourceColumn: FIRST_POPULARITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PREVIOUS_POPULARITY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: eba08c6e-3da4-407d-ad8f-04a5a2dfd3a2
+		summarizeBy: sum
+		sourceColumn: PREVIOUS_POPULARITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POPULARITY_CHANGE_SINCE_FIRST
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 1e4f5f94-02e5-481d-babb-8a9f565b0600
+		summarizeBy: sum
+		sourceColumn: POPULARITY_CHANGE_SINCE_FIRST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POPULARITY_CHANGE_SINCE_LAST
+		dataType: double
+		sourceProviderType: double
+		lineageTag: bc8925fa-c971-4a27-a6ce-830b52160826
+		summarizeBy: sum
+		sourceColumn: POPULARITY_CHANGE_SINCE_LAST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOADED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fa4a4c23-d23e-45f0-9d89-c8c4095329d2
+		summarizeBy: none
+		sourceColumn: LOADED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PEOPLE = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
+				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
+				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
+				    DIM_PEOPLE_Table = PROD_MARTS_Schema{[Name="DIM_PEOPLE",Kind="Table"]}[Data]
+				in
+				    DIM_PEOPLE_Table
+
+	annotation PBI_ResultType = Table
+

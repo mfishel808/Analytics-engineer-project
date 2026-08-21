@@ -1,0 +1,46 @@
+table REF_GENRES
+	lineageTag: 62a75e7a-67ab-4f76-85ff-c3688e8e6a77
+
+	column GENRE_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 9e8005b0-1912-46ab-b823-732e9e894465
+		summarizeBy: count
+		sourceColumn: GENRE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GENRE_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: d5fe0f53-4711-411c-824c-8f74c484c9ce
+		summarizeBy: none
+		sourceColumn: GENRE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOADED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 091a1bcd-b977-4798-b983-5ac2afaa9ad5
+		summarizeBy: none
+		sourceColumn: LOADED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition REF_GENRES = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
+				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
+				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
+				    REF_GENRES_Table = PROD_MARTS_Schema{[Name="REF_GENRES",Kind="Table"]}[Data]
+				in
+				    REF_GENRES_Table
+
+	annotation PBI_ResultType = Table
+

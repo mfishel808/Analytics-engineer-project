@@ -1,0 +1,104 @@
+table BRIDGE_MOVIE_CREDITS
+	lineageTag: 6b7d6077-4f83-4902-9b78-476b64cab920
+
+	column CREDIT_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 59108ee9-4c56-4a1e-9403-4b7f6ecba7ea
+		summarizeBy: none
+		sourceColumn: CREDIT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVIE_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: ede220db-a590-4671-b130-0da1fa8e1a2c
+		summarizeBy: count
+		sourceColumn: MOVIE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PERSON_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: aae64378-3b18-4b64-b7d2-1cc6039ca62a
+		summarizeBy: count
+		sourceColumn: PERSON_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_TYPE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: c90730e3-71f9-4b4e-9f36-2ba62778d164
+		summarizeBy: none
+		sourceColumn: CREDIT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHARACTER_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 17d27380-f4d7-4add-be5c-9ed6eafd2599
+		summarizeBy: none
+		sourceColumn: CHARACTER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTMENT
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 5b71f1d9-8b6f-463c-9c9b-2bd537551775
+		summarizeBy: none
+		sourceColumn: DEPARTMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: dbd0ce7d-695f-45a4-a42f-327b52e98c3c
+		summarizeBy: none
+		sourceColumn: JOB
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAST_ORDER
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: abdbfed9-bff2-42c8-923b-591ddd94c37f
+		summarizeBy: sum
+		sourceColumn: CAST_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOADED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bf2ae2f7-b913-412f-abf1-722857e099fe
+		summarizeBy: none
+		sourceColumn: LOADED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BRIDGE_MOVIE_CREDITS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
+				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
+				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
+				    BRIDGE_MOVIE_CREDITS_Table = PROD_MARTS_Schema{[Name="BRIDGE_MOVIE_CREDITS",Kind="Table"]}[Data]
+				in
+				    BRIDGE_MOVIE_CREDITS_Table
+
+	annotation PBI_ResultType = Table
+
