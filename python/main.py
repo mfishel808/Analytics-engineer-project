@@ -5,7 +5,7 @@ Created on Tue Aug  4 22:41:24 2026
 @author: maxfi
 """
 
-from tmdb_api import full_download, page_download,get_movie_credits
+from tmdb_api import full_download, page_download,get_movie_credits,get_movie_details
 from transformations import popular_movies_clean,create_genres_dataframe,create_people_dataframe,create_movie_credits_dataframe, create_movie_genres_dataframe
 from snowflake_loader import snowflake_uploader
 
@@ -16,7 +16,8 @@ def main():
         connected = []
         try:
             all_movies = full_download(page_first = 1,page_last = 25, max_errors=5, url = "https://api.themoviedb.org/3/movie/popular")
-            movies= popular_movies_clean(all_movies)
+            details, not_loaded = get_movie_details(all_movies)
+            movies= popular_movies_clean(main = all_movies, detail = details)
             download.append(movies)
             connected.append("MOVIES")
         except:
