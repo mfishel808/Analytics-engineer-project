@@ -1,0 +1,251 @@
+table DIM_MOVIES
+	lineageTag: a50b6b30-4558-4ef2-8351-b35bd1ae8175
+
+	column MOVIE_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 64a780da-21ab-4585-b778-1c43ab88fbc2
+		summarizeBy: count
+		sourceColumn: MOVIE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TITLE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 4605a8b8-7eda-49a0-bd5d-0ca6eb32d802
+		summarizeBy: none
+		sourceColumn: TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGINAL_TITLE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 0ecc473f-df25-4b82-9ec1-25bc78b9fcb3
+		summarizeBy: none
+		sourceColumn: ORIGINAL_TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RELEASE_DATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 396f4859-a0e7-450d-aab8-c25361ce495f
+		summarizeBy: none
+		sourceColumn: RELEASE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ORIGINAL_LANGUAGE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: b86e048a-3855-4c5d-bf69-894e7d70edb4
+		summarizeBy: none
+		sourceColumn: ORIGINAL_LANGUAGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ADULT
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 6413c97b-d78a-4a91-b372-fe42dd551546
+		summarizeBy: none
+		sourceColumn: ADULT
+
+		annotation SummarizationSetBy = Automatic
+
+	column POPULARITY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: cb46f880-5195-456e-8fb3-088066b8b6c5
+		summarizeBy: sum
+		sourceColumn: POPULARITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_RATING
+		dataType: double
+		sourceProviderType: double
+		lineageTag: ee885ca5-fff7-44d2-a6aa-96cfcec451b8
+		summarizeBy: sum
+		sourceColumn: AVERAGE_RATING
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RATING_COUNT
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 0e88e7bf-27da-4da5-b652-294a49eefcb5
+		summarizeBy: sum
+		sourceColumn: RATING_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_POPULARITY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: bcb6fedd-339c-4c21-87ed-2693ebaa742f
+		summarizeBy: sum
+		sourceColumn: FIRST_POPULARITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_AVERAGE_RATING
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 9c1ea475-cc5f-4816-be21-b580bf3ecb43
+		summarizeBy: sum
+		sourceColumn: FIRST_AVERAGE_RATING
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_RATING_COUNT
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 890a29c2-f0d4-433c-9d97-f7637d8913c1
+		summarizeBy: sum
+		sourceColumn: FIRST_RATING_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PREVIOUS_POPULARITY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 57f643d2-27c8-446c-a478-9e50ddeef080
+		summarizeBy: sum
+		sourceColumn: PREVIOUS_POPULARITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PREVIOUS_AVERAGE_RATING
+		dataType: double
+		sourceProviderType: double
+		lineageTag: b1dfcddf-9ed2-4b9e-ac93-76ac381b8af6
+		summarizeBy: sum
+		sourceColumn: PREVIOUS_AVERAGE_RATING
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PREVIOUS_RATING_COUNT
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: c4aed29d-8132-45de-b0d4-96ed69af6396
+		summarizeBy: sum
+		sourceColumn: PREVIOUS_RATING_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POPULARITY_CHANGE_SINCE_FIRST
+		dataType: double
+		sourceProviderType: double
+		lineageTag: ba48a999-74bf-4a78-bf64-41c57c61b366
+		summarizeBy: sum
+		sourceColumn: POPULARITY_CHANGE_SINCE_FIRST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_RATING_CHANGE_SINCE_FIRST
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 6c22987c-31d5-4a51-a865-c264ba50752f
+		summarizeBy: sum
+		sourceColumn: AVERAGE_RATING_CHANGE_SINCE_FIRST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RATING_COUNT_CHANGE_SINCE_FIRST
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 5b7ef91b-9044-4298-8225-a809f53c9957
+		summarizeBy: sum
+		sourceColumn: RATING_COUNT_CHANGE_SINCE_FIRST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POPULARITY_CHANGE_SINCE_LAST
+		dataType: double
+		sourceProviderType: double
+		lineageTag: a59e6037-b248-473b-86f0-f3a745fe1f4a
+		summarizeBy: sum
+		sourceColumn: POPULARITY_CHANGE_SINCE_LAST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_RATING_CHANGE_SINCE_LAST
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 81d7c0ea-717f-4eac-9707-4c418bcd1fc6
+		summarizeBy: sum
+		sourceColumn: AVERAGE_RATING_CHANGE_SINCE_LAST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RATING_COUNT_CHANGE_SINCE_LAST
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 4c220809-e049-457d-bd78-0ee0dbada0ce
+		summarizeBy: sum
+		sourceColumn: RATING_COUNT_CHANGE_SINCE_LAST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOADED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: e07ba021-3060-4c53-bcc5-abc37361847f
+		summarizeBy: none
+		sourceColumn: LOADED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_MOVIES = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
+				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
+				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
+				    DIM_MOVIES_Table = PROD_MARTS_Schema{[Name="DIM_MOVIES",Kind="Table"]}[Data]
+				in
+				    DIM_MOVIES_Table
+
+	annotation PBI_ResultType = Table
+

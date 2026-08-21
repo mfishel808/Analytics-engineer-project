@@ -1,0 +1,48 @@
+table BRIDGE_MOVIE_GENRES
+	lineageTag: 420913a9-b796-4c16-815a-6007ec9fde56
+
+	column MOVIE_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 7830063a-1911-4b17-adcb-5c502cf233b8
+		summarizeBy: count
+		sourceColumn: MOVIE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GENRE_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 327108f7-cd37-4002-9a77-248c93462e80
+		summarizeBy: count
+		sourceColumn: GENRE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOADED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bba1a464-54ed-4188-8322-555b9701c333
+		summarizeBy: none
+		sourceColumn: LOADED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BRIDGE_MOVIE_GENRES = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
+				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
+				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
+				    BRIDGE_MOVIE_GENRES_Table = PROD_MARTS_Schema{[Name="BRIDGE_MOVIE_GENRES",Kind="Table"]}[Data]
+				in
+				    BRIDGE_MOVIE_GENRES_Table
+
+	annotation PBI_ResultType = Table
+
