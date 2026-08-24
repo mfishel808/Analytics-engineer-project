@@ -29,6 +29,12 @@ with movie_history as (
             rows between unbounded preceding and unbounded following
         ) as first_rating_count,
 
+        first_value(revenue) over (
+            partition by movie_id
+            order by dbt_valid_from
+            rows between unbounded preceding and unbounded following
+        ) as first_revenue,
+
         lag(popularity) over (
             partition by movie_id
             order by dbt_valid_from
@@ -43,6 +49,11 @@ with movie_history as (
             partition by movie_id
             order by dbt_valid_from
         ) as previous_rating_count,
+
+        lag(revenue) over (
+            partition by movie_id
+            order by dbt_valid_from
+        ) as previous_revenue,
 
         row_number() over (
             partition by movie_id
@@ -72,14 +83,18 @@ final as (
         m.adult,
 
         -- Current values
+        m.budget,
+        m.runtime,
         m.popularity,
         m.average_rating,
         m.rating_count,
+        m.revenue,
 
         -- First recorded values
         h.first_popularity,
         h.first_average_rating,
         h.first_rating_count,
+        h.first_revenue,
 
         -- Previous recorded values
         coalesce(
@@ -97,6 +112,11 @@ final as (
             m.rating_count
         ) as previous_rating_count,
 
+        coalesce(
+            h.previous_revenue,
+            m.revenue
+        ) as previous_revenue,
+
         -- Change since first observation
         m.popularity
             - h.first_popularity
@@ -109,6 +129,10 @@ final as (
         m.rating_count
             - h.first_rating_count
             as rating_count_change_since_first,
+
+        m.revenue
+            - h.first_revenue
+            as revenue_change_since_first,
 
         -- Change since previous observation
         m.popularity
@@ -131,6 +155,13 @@ final as (
                 m.rating_count
             )
             as rating_count_change_since_last,
+        
+        m.revenue
+            - coalesce(
+                h.previous_revenue,
+                m.revenue
+            )
+            as revenue_change_since_last,
 
         m.loaded_at
 
