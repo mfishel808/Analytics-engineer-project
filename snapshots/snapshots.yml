@@ -11,6 +11,7 @@ snapshots:
         - popularity
         - average_rating
         - rating_count
+        - revenue
 
       updated_at: loaded_at
 
