@@ -15,6 +15,9 @@ select
     average_rating,
     rating_count,
     popularity,
+    case when revenue = 0 then null else revenue end revenue,
+    case when budget = 0 then null else budget end budget,
+    runtime,
     adult,
     loaded_at
 
