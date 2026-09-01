@@ -5,7 +5,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: e1142f11-33eb-43a2-863c-57955e6918bc
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: PERSON_ID
 
 		annotation SummarizationSetBy = Automatic
@@ -34,7 +34,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: fe0c39eb-3df4-4478-a6da-e124fc8c7f74
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: GENDER
 
 		annotation SummarizationSetBy = Automatic
@@ -45,7 +45,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: double
 		lineageTag: 331ec65f-6d5c-40d5-9d55-85f86a7053d9
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: POPULARITY
 
 		annotation SummarizationSetBy = Automatic
@@ -56,7 +56,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: double
 		lineageTag: ca88eb02-0480-45ab-958e-f930f872b50b
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: FIRST_POPULARITY
 
 		annotation SummarizationSetBy = Automatic
@@ -67,7 +67,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: double
 		lineageTag: eba08c6e-3da4-407d-ad8f-04a5a2dfd3a2
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: PREVIOUS_POPULARITY
 
 		annotation SummarizationSetBy = Automatic
@@ -78,7 +78,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: double
 		lineageTag: 1e4f5f94-02e5-481d-babb-8a9f565b0600
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: POPULARITY_CHANGE_SINCE_FIRST
 
 		annotation SummarizationSetBy = Automatic
@@ -89,7 +89,7 @@ table DIM_PEOPLE
 		dataType: double
 		sourceProviderType: double
 		lineageTag: bc8925fa-c971-4a27-a6ce-830b52160826
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: POPULARITY_CHANGE_SINCE_LAST
 
 		annotation SummarizationSetBy = Automatic
@@ -106,6 +106,14 @@ table DIM_PEOPLE
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Gender Desc'
+		dataType: string
+		lineageTag: 1a249f19-1887-4c61-a95f-51020145edd2
+		summarizeBy: none
+		sourceColumn: Gender Desc
+
+		annotation SummarizationSetBy = Automatic
+
 	partition DIM_PEOPLE = m
 		mode: directQuery
 		source =
@@ -113,9 +121,12 @@ table DIM_PEOPLE
 				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
 				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
 				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
-				    DIM_PEOPLE_Table = PROD_MARTS_Schema{[Name="DIM_PEOPLE",Kind="Table"]}[Data]
+				    DIM_PEOPLE_Table = PROD_MARTS_Schema{[Name="DIM_PEOPLE",Kind="Table"]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(DIM_PEOPLE_Table, "Gender Desc", each if [GENDER] = 0 then "Not Specified" else if [GENDER] = 1 then "Female" else if [GENDER] = 2 then "Male" else if [GENDER] = 3 then "Non-Binary" else null)
 				in
-				    DIM_PEOPLE_Table
+				    #"Added Conditional Column"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

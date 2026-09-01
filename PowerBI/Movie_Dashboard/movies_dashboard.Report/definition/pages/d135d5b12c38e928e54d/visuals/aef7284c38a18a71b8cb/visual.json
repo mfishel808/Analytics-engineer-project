@@ -1,0 +1,700 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "aef7284c38a18a71b8cb",
+  "position": {
+    "x": 0,
+    "y": 111.08280254777071,
+    "z": 1000,
+    "height": 230.31847133757964,
+    "width": 1280,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_MOVIES"
+                    }
+                  },
+                  "Property": "MOVIE_ID"
+                }
+              },
+              "queryRef": "DIM_MOVIES.MOVIE_ID",
+              "nativeQueryRef": "MOVIE_ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_MOVIES"
+                    }
+                  },
+                  "Property": "TITLE"
+                }
+              },
+              "queryRef": "DIM_MOVIES.TITLE",
+              "nativeQueryRef": "TITLE"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "AVERAGE_RATING"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.AVERAGE_RATING)",
+              "nativeQueryRef": "Rating",
+              "displayName": "Rating"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "POPULARITY"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.POPULARITY)",
+              "nativeQueryRef": "Popularity",
+              "displayName": "Popularity"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "RATING_COUNT"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.RATING_COUNT)",
+              "nativeQueryRef": "Rating Count",
+              "displayName": "Rating Count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_MOVIES"
+                    }
+                  },
+                  "Property": "ORIGINAL_LANGUAGE"
+                }
+              },
+              "queryRef": "DIM_MOVIES.ORIGINAL_LANGUAGE",
+              "nativeQueryRef": "Language",
+              "displayName": "Language"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "REF_GENRES"
+                    }
+                  },
+                  "Property": "Movie Genres"
+                }
+              },
+              "queryRef": "REF_GENRES.Movie Genres",
+              "nativeQueryRef": "Movie Genres"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "RUNTIME"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.RUNTIME)",
+              "nativeQueryRef": "Runtime",
+              "displayName": "Runtime"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_MOVIES"
+                    }
+                  },
+                  "Property": "RELEASE_DATE"
+                }
+              },
+              "queryRef": "DIM_MOVIES.RELEASE_DATE",
+              "nativeQueryRef": "RELEASE_DATE"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_MOVIES"
+                    }
+                  },
+                  "Property": "Movie Score"
+                }
+              },
+              "queryRef": "DIM_MOVIES.Movie Score",
+              "nativeQueryRef": "Movie Score"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "REF_GENRES"
+                  }
+                },
+                "Property": "Movie Genres"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_MOVIES.MOVIE_ID"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "440.07023991686566D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_MOVIES.TITLE"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "112.45299145299145D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(DIM_MOVIES.AVERAGE_RATING)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "153.14529914529913D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(DIM_MOVIES.POPULARITY)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "138.57264957264957D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_MOVIES.RELEASE_DATE"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_MOVIES.RELEASE_DATE"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            },
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(DIM_MOVIES.AVERAGE_RATING)"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            },
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(DIM_MOVIES.POPULARITY)"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_MOVIES.TITLE"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'b7999a7ad0defb4760c0'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b7879629a4efc3c317fe",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_MOVIES"
+              }
+            },
+            "Property": "TITLE"
+          }
+        },
+        "type": "TopN",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "subquery",
+              "Expression": {
+                "Subquery": {
+                  "Query": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "DIM_MOVIES",
+                        "Type": 0
+                      }
+                    ],
+                    "Select": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "TITLE"
+                        },
+                        "Name": "field"
+                      }
+                    ],
+                    "OrderBy": [
+                      {
+                        "Direction": 2,
+                        "Expression": {
+                          "Measure": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "Movie Score"
+                          }
+                        }
+                      }
+                    ],
+                    "Top": 10
+                  }
+                }
+              },
+              "Type": 2
+            },
+            {
+              "Name": "d",
+              "Entity": "DIM_MOVIES",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "TITLE"
+                      }
+                    }
+                  ],
+                  "Table": {
+                    "SourceRef": {
+                      "Source": "subquery"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "16bcba0b1ac16d1975a2",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_MOVIES"
+              }
+            },
+            "Property": "Movie Score"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DIM_MOVIES",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 1,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "d"
+                        }
+                      },
+                      "Property": "Movie Score"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "0L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "7af38b6026185ef85f46",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "POPULARITY"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ef689860506c22437662",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "AVERAGE_RATING"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8df6169e3038d774f986",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_MOVIES"
+              }
+            },
+            "Property": "ORIGINAL_LANGUAGE"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "05c8619dfb9ca3379591",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "REF_GENRES"
+              }
+            },
+            "Property": "Movie Genres"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b2481fffdc1160b8363b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "RATING_COUNT"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1a60d51de7632fd2e010",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "RUNTIME"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9e7ac9e84606f7dedf56",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_MOVIES"
+              }
+            },
+            "Property": "MOVIE_ID"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4f86b756bcadeee4db10",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_MOVIES"
+              }
+            },
+            "Property": "RELEASE_DATE"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

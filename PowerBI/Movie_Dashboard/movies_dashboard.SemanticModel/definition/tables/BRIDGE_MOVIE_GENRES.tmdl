@@ -1,11 +1,19 @@
 table BRIDGE_MOVIE_GENRES
 	lineageTag: 420913a9-b796-4c16-815a-6007ec9fde56
 
+	measure 'Movies by Genre' =
+			
+			DISTINCTCOUNT(
+			    BRIDGE_MOVIE_GENRES[MOVIE_ID]
+			)
+		formatString: 0
+		lineageTag: 20f6605c-7dd1-4bd9-8f6e-bd7087b7402a
+
 	column MOVIE_ID
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: 7830063a-1911-4b17-adcb-5c502cf233b8
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: MOVIE_ID
 
 		annotation SummarizationSetBy = Automatic
@@ -16,7 +24,7 @@ table BRIDGE_MOVIE_GENRES
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: 327108f7-cd37-4002-9a77-248c93462e80
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: GENRE_ID
 
 		annotation SummarizationSetBy = Automatic
@@ -45,4 +53,6 @@ table BRIDGE_MOVIE_GENRES
 				    BRIDGE_MOVIE_GENRES_Table
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

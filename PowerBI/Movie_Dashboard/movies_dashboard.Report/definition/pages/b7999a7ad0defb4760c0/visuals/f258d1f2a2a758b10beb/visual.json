@@ -1,0 +1,119 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "f258d1f2a2a758b10beb",
+  "position": {
+    "x": 9.91394148020654,
+    "y": 135.49053356282272,
+    "z": 2000,
+    "height": 577.21170395869194,
+    "width": 480.27538726333904,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_PEOPLE"
+                    }
+                  },
+                  "Property": "PERSON_NAME"
+                }
+              },
+              "queryRef": "DIM_PEOPLE.PERSON_NAME",
+              "nativeQueryRef": "PERSON_NAME"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_PEOPLE"
+                    }
+                  },
+                  "Property": "KNOWN_FOR_DEPARTMENT"
+                }
+              },
+              "queryRef": "DIM_PEOPLE.KNOWN_FOR_DEPARTMENT",
+              "nativeQueryRef": "KNOWN_FOR_DEPARTMENT"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_PEOPLE"
+                    }
+                  },
+                  "Property": "Gender Desc"
+                }
+              },
+              "queryRef": "DIM_PEOPLE.Gender Desc",
+              "nativeQueryRef": "Gender Desc"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "575d476c74385ae5d864",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_PEOPLE"
+              }
+            },
+            "Property": "PERSON_NAME"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "05aac012a0729cb8f090",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_PEOPLE"
+              }
+            },
+            "Property": "Gender Desc"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4cdbc80fe5239b8e9613",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_PEOPLE"
+              }
+            },
+            "Property": "KNOWN_FOR_DEPARTMENT"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

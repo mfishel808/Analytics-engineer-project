@@ -1,6 +1,9 @@
 table BRIDGE_MOVIE_CREDITS
 	lineageTag: 6b7d6077-4f83-4902-9b78-476b64cab920
 
+	measure 'Gross Earning'
+		lineageTag: 70bd3929-38b0-40f5-9dd4-0314259aa54c
+
 	column CREDIT_ID
 		dataType: string
 		sourceProviderType: nvarchar(16777216)
@@ -14,7 +17,7 @@ table BRIDGE_MOVIE_CREDITS
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: ede220db-a590-4671-b130-0da1fa8e1a2c
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: MOVIE_ID
 
 		annotation SummarizationSetBy = Automatic
@@ -25,7 +28,7 @@ table BRIDGE_MOVIE_CREDITS
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: aae64378-3b18-4b64-b7d2-1cc6039ca62a
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: PERSON_ID
 
 		annotation SummarizationSetBy = Automatic
@@ -100,5 +103,7 @@ table BRIDGE_MOVIE_CREDITS
 				in
 				    BRIDGE_MOVIE_CREDITS_Table
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
 
