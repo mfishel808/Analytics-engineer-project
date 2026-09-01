@@ -1,0 +1,64 @@
+table _TOOLTIP_REF_GENRES
+	lineageTag: 2708d23d-6c1b-489b-a7ac-2fa502f9b978
+
+	measure 'Tooltip Genre Color' =
+			
+			VAR TooltipGenre =
+			    SELECTEDVALUE(_TOOLTIP_REF_GENRES[GENRE_NAME])
+			
+			VAR SelectedGenre =
+			    SELECTEDVALUE(REF_GENRES[GENRE_NAME])
+			
+			RETURN
+			    IF(
+			        TooltipGenre = SelectedGenre,
+			        "#C8102E",   --selected = black
+			        "#111111"   --everything else = red
+			    )
+		lineageTag: 3325c46d-c719-4728-80ca-61f26d04b663
+
+	column GENRE_ID
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: f489096b-a7e9-402f-bc64-5d2424e42ba3
+		summarizeBy: none
+		sourceColumn: GENRE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GENRE_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 03bc18e6-bf7e-41e6-ad62-0e3700b91223
+		summarizeBy: none
+		sourceColumn: GENRE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOADED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 591f2f5f-bba2-4a5d-8f95-4d2c67f09316
+		summarizeBy: none
+		sourceColumn: LOADED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _TOOLTIP_REF_GENRES = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("GFVHJLE-HK92660.snowflakecomputing.com","STREAMSIGHT_WH",[Implementation="2.0"]),
+				    STREAMSIGHT_Database = Source{[Name="STREAMSIGHT",Kind="Database"]}[Data],
+				    PROD_MARTS_Schema = STREAMSIGHT_Database{[Name="PROD_MARTS",Kind="Schema"]}[Data],
+				    REF_GENRES_Table = PROD_MARTS_Schema{[Name="REF_GENRES",Kind="Table"]}[Data]
+				in
+				    REF_GENRES_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 478,
         "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 2
+            "x": 478,
+            "y": 211
           },
           "nodeIndex": "BRIDGE_MOVIE_CREDITS",
           "nodeLineageTag": "6b7d6077-4f83-4902-9b78-476b64cab920",
@@ -19,12 +19,12 @@
             "height": 296,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 284,
-            "y": 74
+            "x": 323,
+            "y": 524
           },
           "nodeIndex": "BRIDGE_MOVIE_GENRES",
           "nodeLineageTag": "420913a9-b796-4c16-815a-6007ec9fde56",
@@ -32,12 +32,12 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 568,
-            "y": 0
+            "x": 0,
+            "y": 11
           },
           "nodeIndex": "DIM_MOVIES",
           "nodeLineageTag": "a50b6b30-4558-4ef2-8351-b35bd1ae8175",
@@ -45,7 +45,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 5
         },
         {
           "location": {
@@ -58,12 +58,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 1136,
-            "y": 74
+            "x": 861,
+            "y": 537
           },
           "nodeIndex": "REF_GENRES",
           "nodeLineageTag": "62a75e7a-67ab-4f76-85ff-c3688e8e6a77",
@@ -71,10 +71,63 @@
             "height": 152,
             "width": 234
           },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1441,
+            "y": 27.5
+          },
+          "nodeIndex": "_TOOLTIP_REF_GENRES",
+          "nodeLineageTag": "2708d23d-6c1b-489b-a7ac-2fa502f9b978",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1145,
+            "y": 268.5
+          },
+          "nodeIndex": "_TOOLTIP_BRIDGE_MOVIE_GENRES",
+          "nodeLineageTag": "2af5b242-faf1-4acb-963f-d0592d30ee4b",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1429,
+            "y": 194.5
+          },
+          "nodeIndex": "_TOOLTIP_DIM_MOVIES",
+          "nodeLineageTag": "3b570e6c-1232-440f-9910-7601c871eb16",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
           "zIndex": 0
         }
       ],
       "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [],
+      "name": "Layout 1",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,

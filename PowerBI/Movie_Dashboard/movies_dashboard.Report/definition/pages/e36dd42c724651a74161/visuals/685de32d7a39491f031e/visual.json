@@ -1,0 +1,183 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "685de32d7a39491f031e",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 356,
+    "width": 492,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pieChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_TOOLTIP_REF_GENRES"
+                    }
+                  },
+                  "Property": "GENRE_NAME"
+                }
+              },
+              "queryRef": "_TOOLTIP_REF_GENRES.GENRE_NAME",
+              "nativeQueryRef": "GENRE_NAME",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_TOOLTIP_DIM_MOVIES"
+                    }
+                  },
+                  "Property": "Tooltip Movie Count"
+                }
+              },
+              "queryRef": "_TOOLTIP_DIM_MOVIES.Tooltip Movie Count",
+              "nativeQueryRef": "Tooltip Movie Count"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_TOOLTIP_DIM_MOVIES"
+                  }
+                },
+                "Property": "Tooltip Movie Count"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_TOOLTIP_REF_GENRES"
+                        }
+                      },
+                      "Property": "Tooltip Genre Color"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "roles": [
+                  "Category"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "borderShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_TOOLTIP_REF_GENRES"
+                        }
+                      },
+                      "Property": "Tooltip Genre Color"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Movie ID(Count)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "cb340791822acf53b4b4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_TOOLTIP_REF_GENRES"
+              }
+            },
+            "Property": "GENRE_NAME"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

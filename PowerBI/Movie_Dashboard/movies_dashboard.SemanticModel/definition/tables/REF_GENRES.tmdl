@@ -1,11 +1,42 @@
 table REF_GENRES
 	lineageTag: 62a75e7a-67ab-4f76-85ff-c3688e8e6a77
 
+	measure 'Movie Genres' =
+			
+			CONCATENATEX(
+			    VALUES(REF_GENRES[GENRE_NAME]),
+			    REF_GENRES[GENRE_NAME],
+			    ", ",
+			    REF_GENRES[GENRE_NAME],
+			    ASC
+			)
+		lineageTag: 9d0f6249-953b-44f3-a55f-07916a9526c2
+
+	measure 'Genre % of Movies by Year' =
+			
+			VAR GenreMovies =
+			    [Movies by Genre]
+			
+			VAR TotalMoviesInYear =
+			    CALCULATE(
+			        [Movies by Genre],
+			        REMOVEFILTERS(REF_GENRES)
+			    )
+			
+			RETURN
+			    DIVIDE(
+			        GenreMovies,
+			        TotalMoviesInYear
+			    )
+		lineageTag: e50d2de7-f5d4-4114-a5fc-a42219600bc6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column GENRE_ID
 		dataType: double
 		sourceProviderType: decimal(38, 0)
 		lineageTag: 9e8005b0-1912-46ab-b823-732e9e894465
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: GENRE_ID
 
 		annotation SummarizationSetBy = Automatic

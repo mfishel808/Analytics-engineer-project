@@ -1,0 +1,263 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "ae579252dee5ebb2541f",
+  "position": {
+    "x": 490.18932874354562,
+    "y": 135.49053356282272,
+    "z": 2003,
+    "height": 210.39586919104991,
+    "width": 395.45611015490533,
+    "tabOrder": 2003
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "POPULARITY_CHANGE_SINCE_FIRST"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.POPULARITY_CHANGE_SINCE_FIRST)",
+              "nativeQueryRef": "Sum of POPULARITY_CHANGE_SINCE_FIRST"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "POPULARITY_CHANGE_SINCE_LAST"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.POPULARITY_CHANGE_SINCE_LAST)",
+              "nativeQueryRef": "Sum of POPULARITY_CHANGE_SINCE_LAST"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "FIRST_POPULARITY"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.FIRST_POPULARITY)",
+              "nativeQueryRef": "Original Popularity",
+              "displayName": "Original Popularity"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "PREVIOUS_POPULARITY"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.PREVIOUS_POPULARITY)",
+              "nativeQueryRef": "Previous Popularity",
+              "displayName": "Previous Popularity"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_MOVIES"
+                        }
+                      },
+                      "Property": "POPULARITY"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(DIM_MOVIES.POPULARITY)",
+              "nativeQueryRef": "Current Popularity",
+              "displayName": "Current Popularity"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "DIM_MOVIES"
+                      }
+                    },
+                    "Property": "FIRST_POPULARITY"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Popularity Detail'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ab1d3402bdc3e93a9b28",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "FIRST_POPULARITY"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "59b51b5b5c331ad1ec1c",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "PREVIOUS_POPULARITY"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8ed298bb8092035504cb",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "POPULARITY"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9a1ebc05f28a1d10f289",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "POPULARITY_CHANGE_SINCE_FIRST"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "780d494024c9d15b64bf",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_MOVIES"
+                  }
+                },
+                "Property": "POPULARITY_CHANGE_SINCE_LAST"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

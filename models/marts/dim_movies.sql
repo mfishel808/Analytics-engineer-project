@@ -9,6 +9,7 @@ with movie_history as (
         popularity,
         average_rating,
         rating_count,
+        revenue,
         dbt_valid_from,
 
         first_value(popularity) over (
@@ -29,11 +30,15 @@ with movie_history as (
             rows between unbounded preceding and unbounded following
         ) as first_rating_count,
 
-        first_value(revenue) over (
+        first_value(revenue) ignore nulls over (
             partition by movie_id
             order by dbt_valid_from
             rows between unbounded preceding and unbounded following
         ) as first_revenue,
+
+        min(dbt_valid_from) over (
+            partition by movie_id
+        ) as first_value_date,
 
         lag(popularity) over (
             partition by movie_id
@@ -54,6 +59,11 @@ with movie_history as (
             partition by movie_id
             order by dbt_valid_from
         ) as previous_revenue,
+
+        lag(dbt_valid_from) over (
+            partition by movie_id
+            order by dbt_valid_from
+        ) as previous_value_date,
 
         row_number() over (
             partition by movie_id
@@ -90,11 +100,38 @@ final as (
         m.rating_count,
         m.revenue,
 
+        h.dbt_valid_from as current_value_date,
+
         -- First recorded values
-        h.first_popularity,
-        h.first_average_rating,
-        h.first_rating_count,
-        h.first_revenue,
+        coalesce(
+            h.first_popularity,
+            h.previous_popularity,
+            m.popularity
+        ) as first_popularity,
+
+        coalesce(
+            h.first_average_rating,
+            h.previous_average_rating,
+            m.average_rating
+        ) as first_average_rating,
+
+        coalesce(
+            h.first_rating_count,
+            h.previous_rating_count,
+            m.rating_count
+        ) as first_rating_count,
+
+        coalesce(
+            h.first_revenue,
+            h.previous_revenue,
+            m.revenue
+        ) as first_revenue,
+
+        coalesce(
+            h.first_value_date,
+            h.previous_value_date,
+            h.dbt_valid_from
+        ) as first_value_date,
 
         -- Previous recorded values
         coalesce(
@@ -117,21 +154,42 @@ final as (
             m.revenue
         ) as previous_revenue,
 
+        coalesce(
+            h.previous_value_date,
+            h.dbt_valid_from
+        ) as previous_value_date,
+
         -- Change since first observation
         m.popularity
-            - h.first_popularity
+            - coalesce(
+                h.first_popularity,
+                h.previous_popularity,
+                m.popularity
+            )
             as popularity_change_since_first,
 
         m.average_rating
-            - h.first_average_rating
+            - coalesce(
+                h.first_average_rating,
+                h.previous_average_rating,
+                m.average_rating
+            )
             as average_rating_change_since_first,
 
         m.rating_count
-            - h.first_rating_count
+            - coalesce(
+                h.first_rating_count,
+                h.previous_rating_count,
+                m.rating_count
+            )
             as rating_count_change_since_first,
 
         m.revenue
-            - h.first_revenue
+            - coalesce(
+                h.first_revenue,
+                h.previous_revenue,
+                m.revenue
+            )
             as revenue_change_since_first,
 
         -- Change since previous observation
@@ -155,7 +213,7 @@ final as (
                 m.rating_count
             )
             as rating_count_change_since_last,
-        
+
         m.revenue
             - coalesce(
                 h.previous_revenue,

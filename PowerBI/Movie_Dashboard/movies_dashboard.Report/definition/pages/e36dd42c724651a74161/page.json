@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "e36dd42c724651a74161",
+  "displayName": "Movie Count-Tooltip",
+  "displayOption": "ActualSize",
+  "height": 350,
+  "width": 500,
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}
