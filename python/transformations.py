@@ -132,3 +132,37 @@ def create_movie_genres_dataframe(movies: list[dict]):
     )
 
     return movie_genres_df
+
+def create_movie_studio_dataframe(
+    movie_studio_records: list[dict],
+) -> pd.DataFrame:
+
+    movie_studio_df = pd.DataFrame(movie_studio_records)
+
+    movie_studio_df = movie_studio_df.rename(
+        columns={
+            "movie_id": "MOVIE_ID",
+            "company_id": "COMPANY_ID",
+        }
+    )
+
+    return movie_studio_df
+
+def create_studio_dataframe(
+    studio_detail_records: list[dict],
+) -> pd.DataFrame:
+
+    studio_df = pd.DataFrame(studio_detail_records)
+
+    studio_df = studio_df.rename(
+        columns={
+            "company_id": "COMPANY_ID",
+            "company_name": "COMPANY_NAME",
+            "origin_country": "ORIGIN_COUNTRY",
+            "headquarters": "HEADQUARTERS",
+            "parent_company_id": "PARENT_COMPANY_ID",
+            "parent_company_name": "PARENT_COMPANY_NAME",
+        }
+    )
+
+    return studio_df
