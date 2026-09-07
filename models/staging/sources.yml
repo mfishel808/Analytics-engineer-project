@@ -12,4 +12,10 @@ sources:
       - name: genres
       - name: movie_genres
       - name: movie_credits
+
+      - name: studios
+
+      - name: movie_studios
+
+
       
