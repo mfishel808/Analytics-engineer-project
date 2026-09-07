@@ -169,6 +169,7 @@ def get_movie_credits(movies: list[dict]) -> list[dict]|list:
 def get_movie_details(movies: list[dict]) -> list[dict]|list:
 
     movie_detail_records = []
+    movie_studio = []
 
     movie_list = [movie["id"] for movie in movies]
     movie_unique = list(set(movie_list))
@@ -203,6 +204,13 @@ def get_movie_details(movies: list[dict]) -> list[dict]|list:
                         "runtime": movie_data.get("runtime"),
                     }
                 )
+                for company_id in movie_data.get("production_companies", []):
+                    movie_studio.append(
+                        {
+                            "MOVIE_ID": movie_id,
+                            "Company_ID": company_id['id']
+                        }
+                    )
 
             except requests.exceptions.RequestException as error:
                 print(
@@ -211,5 +219,74 @@ def get_movie_details(movies: list[dict]) -> list[dict]|list:
                 )
 
                 id_not_loaded.append(movie_id)
+            
 
-    return movie_detail_records, id_not_loaded
+    return movie_detail_records,movie_studio, id_not_loaded
+
+def get_company_details(companies: list[dict]):
+
+    company_detail_records = []
+
+    company_list = [
+        company["Company_ID"]
+        for company in companies
+    ]
+
+    company_unique = list(set(company_list))
+
+    id_not_loaded = company_unique
+
+    while len(id_not_loaded) > 10:
+        company_unique = id_not_loaded
+        id_not_loaded = []
+
+        for company_id in company_unique:
+            try:
+                url = (
+                    f"https://api.themoviedb.org/3/company/{company_id}"
+                )
+
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    timeout=30,
+                )
+
+                response.raise_for_status()
+
+                company_data = response.json()
+
+                parent_company = company_data.get("parent_company")
+
+                company_detail_records.append(
+                    {
+                        "company_id": company_id,
+                        "company_name": company_data.get("name"),
+                        "origin_country": company_data.get(
+                            "origin_country"
+                        ),
+                        "headquarters": company_data.get(
+                            "headquarters"
+                        ),
+                        "parent_company_id": (
+                            parent_company.get("id")
+                            if parent_company
+                            else None
+                        ),
+                        "parent_company_name": (
+                            parent_company.get("name")
+                            if parent_company
+                            else None
+                        ),
+                    }
+                )
+
+            except requests.exceptions.RequestException as error:
+                print(
+                    f"Could not load details for company "
+                    f"{company_id}: {error}"
+                )
+
+                id_not_loaded.append(company_id)
+
+    return company_detail_records, id_not_loaded
