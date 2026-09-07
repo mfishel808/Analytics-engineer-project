@@ -66,4 +66,38 @@ models:
               arguments:
                 to: ref('dim_people')
                 field: person_id
-                
+
+  - name: dim_companies
+    columns:
+      - name: company_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: company_name
+        data_tests:
+          - not_null
+
+  - name: bridge_movie_companies
+    columns:
+      - name: movie_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_movies')
+                field: movie_id
+
+      - name: company_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_companies')
+                field: company_id
+  
+  - name: dim_movie_history
+    columns:
+      - name: movie_id
+        data_tests:
+          - not_null      
