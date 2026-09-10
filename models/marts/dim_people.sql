@@ -91,6 +91,10 @@ final as (
                 m.popularity 
             ) 
             as popularity_change_since_last, 
+
+        m.birthday,
+        m.deathday,
+        m.place_of_birth,
  
         m.loaded_at 
  
