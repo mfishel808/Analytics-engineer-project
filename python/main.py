@@ -5,11 +5,11 @@ Created on Tue Aug  4 22:41:24 2026
 @author: maxfi
 """
 
-from tmdb_api import full_download, page_download,get_movie_credits,get_movie_details, get_company_details
+from tmdb_api import full_download, page_download,get_movie_credits,get_movie_details, get_company_details, get_people_details
 from transformations import (popular_movies_clean,create_genres_dataframe,
                             create_people_dataframe,create_movie_credits_dataframe, 
                             create_movie_genres_dataframe, create_studio_dataframe, 
-                            create_movie_studio_dataframe)
+                            create_movie_studio_dataframe, create_people_detail_dataframe)
 from snowflake_loader import snowflake_uploader
 
 def main():
@@ -32,7 +32,8 @@ def main():
         else:
             try:
                 person, credit, NI =get_movie_credits(all_movies)
-                person_df = create_people_dataframe(person)
+                person_detail, NI = get_people_details(person)
+                person_df = create_people_dataframe(people_records=person, people_detail=person_detail)
                 download.append(person_df)
                 connected.append("PEOPLE")
                 credit_df = create_movie_credits_dataframe(credit)
@@ -54,6 +55,12 @@ def main():
                 connected.append("STUDIOS")
             except:
                 unconnected.append("studios")
+            try:
+                pd_df = create_people_detail_dataframe(person_detail)
+                download.append(pd_df)
+                connected.append('PERSON_DETAIL')
+            except:
+                unconnected.append('person_detail')
                 
         try:
             genres = page_download(page = 1, max_attempts = 10, url="https://api.themoviedb.org/3/genre/movie/list", pages = False)

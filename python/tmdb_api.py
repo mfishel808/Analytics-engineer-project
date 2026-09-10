@@ -3,13 +3,22 @@
 import requests
 import pandas as pd
 import time
-
-from config import TMDB_TOKEN
+import snowflake.connector
+from config import (TMDB_TOKEN,
+                    SNOWFLAKE_ACCOUNT,
+                    SNOWFLAKE_DATABASE,
+                    SNOWFLAKE_PAT,
+                    SNOWFLAKE_ROLE,
+                    SNOWFLAKE_SCHEMA,
+                    SNOWFLAKE_USER,
+                    SNOWFLAKE_WAREHOUSE)
+from time import perf_counter
 
 headers = {
     "Authorization": f"Bearer {TMDB_TOKEN}",
     "accept": "application/json"
 }
+
 
 def page_download(url:str, page: int, max_attempts: int = 5, pages: bool = True, endpoint:str = "genres") -> list[dict]:
     url = url
@@ -24,15 +33,16 @@ def page_download(url:str, page: int, max_attempts: int = 5, pages: bool = True,
         }
 
     for attempt in range(1, max_attempts + 1):
-
+        
         try:
+            start = perf_counter()
             response = requests.get(
                 url,
                 headers=headers,
                 params=params,
                 timeout=30,
             )
-
+            print( f"Page {page} took {perf_counter() - start:.2f} seconds")
             response.raise_for_status()
             if pages:
                 print(f"Page {page} successfully downloaded")
@@ -77,7 +87,7 @@ def full_download(url: str, page_first: int=1, page_last: int=25, max_errors: in
     return download
 
 def get_movie_credits(movies: list[dict]) -> list[dict]|list:
-
+    print('downloading movie credits...')
     people_records = []
     movie_credit_records = []
     movie_list = [movie["id"] for movie in movies]
@@ -163,7 +173,8 @@ def get_movie_credits(movies: list[dict]) -> list[dict]|list:
                     f"{movie_id}: {error}"
                 )
                 id_not_loaded.append(movie_id)
-
+                
+    print('movie credits downloaded')
     return people_records, movie_credit_records, id_not_loaded
 
 def get_movie_details(movies: list[dict]) -> list[dict]|list:
@@ -290,3 +301,79 @@ def get_company_details(companies: list[dict]):
                 id_not_loaded.append(company_id)
 
     return company_detail_records, id_not_loaded
+
+def get_people_details(people: list[dict]) -> list[dict] | list:
+    print('downloading people details...')
+    connection = snowflake.connector.connect(
+        account=SNOWFLAKE_ACCOUNT,
+        user=SNOWFLAKE_USER,
+        password=SNOWFLAKE_PAT,
+        warehouse=SNOWFLAKE_WAREHOUSE,
+        database=SNOWFLAKE_DATABASE,
+        schema=SNOWFLAKE_SCHEMA,
+        role=SNOWFLAKE_ROLE,
+    )
+
+    cursor = connection.cursor()
+    
+    try:
+        cursor.execute(
+            """
+            SELECT DISTINCT PERSON_ID
+            FROM STREAMSIGHT.RAW.PERSON_DETAIL
+            """
+        )
+    
+        person_ids = {
+            row[0]
+            for row in cursor.fetchall()
+        }
+    
+    finally:
+        cursor.close()
+        connection.close()
+    print(person_ids)
+    people_detail_records = []
+    
+    people_list = [person["person_id"] for person in people]
+    people_unique = list(set(people_list))
+
+    id_not_loaded = people_unique
+
+    people_unique = id_not_loaded
+    id_not_loaded = []
+    count = 0
+    for person_id in people_unique:
+        count+=1
+        if person_id not in person_ids:
+            try:
+                url = (
+                    f"https://api.themoviedb.org/3/person/{person_id}"
+                )
+    
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    timeout=30,
+                )
+    
+                response.raise_for_status()
+    
+                person_data = response.json()
+    
+                people_detail_records.append(
+                    {
+                        "PERSON_ID": person_id,
+                        "birthday": person_data.get("birthday"),
+                        "deathday": person_data.get("deathday"),
+                        "place_of_birth": person_data.get("place_of_birth"),
+                    }
+                )
+    
+            except:
+                pass
+            if count % 1000 == 0:
+                print(f"finished {count} out of {len(people_unique)} people")
+            
+    print('people details downloaded')
+    return people_detail_records, id_not_loaded

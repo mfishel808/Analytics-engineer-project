@@ -63,13 +63,11 @@ def create_genres_dataframe(genres: list[dict]):
 
     return genres_df
 
-def create_people_dataframe(
-    people_records: list[dict],
-):
+def create_people_dataframe(people_records: list[dict], people_detail: list[dict] = 'detail'):
+    print('making person df...')
+    people_main = pd.DataFrame(people_records)
 
-    people_df = pd.DataFrame(people_records)
-
-    people_df = people_df.rename(
+    people_main = people_main.rename(
         columns={
             "person_id": "PERSON_ID",
             "person_name": "PERSON_NAME",
@@ -79,12 +77,19 @@ def create_people_dataframe(
             "profile_path": "PROFILE_PATH",
         }
     )
-
-    people_df = people_df.drop_duplicates(
+    
+    people_main = people_main.drop_duplicates(
         subset="PERSON_ID"
     )
+    
+    people_detail = pd.DataFrame(people_detail)
+    people_df = pd.merge(people_main, people_detail, on='PERSON_ID', how = 'left')
+    
 
-
+    people_df = people_df.drop_duplicates(
+        subset="PERSON_ID",
+        keep="last")
+    print('person_df made')
     return people_df
 def create_movie_credits_dataframe(
     movie_credit_records: list[dict],
@@ -166,3 +171,15 @@ def create_studio_dataframe(
     )
 
     return studio_df
+
+def create_people_detail_dataframe(people_detail:list[dict]):
+    people_list = [person_detail['PERSON_ID'] for person_detail in people_detail]
+    people_detail_df = pd.DataFrame(people_list, columns=["PERSON_ID"])
+    people_detail_df = people_detail_df.drop_duplicates(
+        subset="PERSON_ID")
+
+    return people_detail_df
+    
+    
+    
+    
