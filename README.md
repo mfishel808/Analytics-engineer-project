@@ -186,7 +186,7 @@ The workflow:
 ```
 
 ## What I Learned
-
+This project gave me hands on experience creating an effective end-to-end analytics pipeline. It allowed me to use Python, dbt, snowflake and PowerBI to take data from source to visualization, using incremental loading to add new data, legacy loading for API effencience as well as data modeling and data testing to visualize correct data. 
 
 
 ## Data Source
