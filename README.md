@@ -14,11 +14,11 @@ StreamSight is an end-to-end analytics engineering project that ingests movie an
 
 ### Movie Overview
 
-![StreamSight Movie Overview](images/movie overview.png)
+![StreamSight Movie Overview](images/movie_overview.png)
 
 ### Movie Financials
 
-![StreamSight Movie Financials](images/Movie Financials.png)
+![StreamSight Movie Financials](images/Movie_Financials.png)
 
 ## Project Overview
 
