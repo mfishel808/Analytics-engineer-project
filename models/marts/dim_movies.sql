@@ -90,6 +90,8 @@ final as (
         m.original_title,
         m.release_date,
         m.original_language,
+        case when m.overview is null then 'No overview available'
+        else m.overview end as overview,
         m.adult,
 
         -- Current values
