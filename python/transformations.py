@@ -15,6 +15,7 @@ def popular_movies_clean(main = 'all_movies', detail = 'detail'):
                 "original_title": movie.get("original_title"),
                 "release_date": movie.get("release_date"),
                 "original_language": movie.get("original_language"),
+                "overview": movie.get("overview"),
                 "average_rating": movie.get("vote_average"),
                 "rating_count": movie.get("vote_count"),
                 "popularity": movie.get("popularity"),
