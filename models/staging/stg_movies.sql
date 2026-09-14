@@ -13,6 +13,7 @@ select
     original_title,
     release_date,
     original_language,
+    overview,
     average_rating,
     rating_count,
     popularity,
